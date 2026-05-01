@@ -1,0 +1,11 @@
+set -e
+
+staged_files="$(git diff --cached --name-only --diff-filter=ACMR)"
+
+if ! echo "$staged_files" | grep -q '^backend/'; then
+  echo "pre-commit: no backend changes, skipping backend checks."
+  exit 0
+fi
+
+echo "pre-commit: backend changes detected, running lint-staged."
+pnpm lint-staged --config .lintstagedrc.mjs

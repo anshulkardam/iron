@@ -1,0 +1,15 @@
+set -e
+
+if git rev-parse --abbrev-ref --symbolic-full-name '@{upstream}' >/dev/null 2>&1; then
+  changed_files="$(git diff --name-only @{upstream}...HEAD)"
+else
+  changed_files="$(git show --pretty='' --name-only HEAD)"
+fi
+
+if ! echo "$changed_files" | grep -q '^backend/'; then
+  echo "pre-push: no backend changes, skipping backend checks."
+  exit 0
+fi
+
+echo "pre-push: backend changes detected, running backend tests."
+pnpm --dir backend test

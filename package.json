@@ -1,0 +1,12 @@
+{
+  "name": "code-iron",
+  "private": true,
+  "scripts": {
+    "prepare": "pnpm exec husky",
+    "lint-staged": "pnpm exec lint-staged"
+  },
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.6"
+  }
+}

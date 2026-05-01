@@ -16,6 +16,10 @@ Run all commands from `backend/`.
 - `pnpm run test:e2e` runs e2e tests from `backend/test`.
 - `pnpm run test:cov` generates Jest coverage output in `backend/coverage`.
 
+Husky is configured at repository root in `.husky/`. Run `pnpm install` from the repository root once to install hooks. Current hooks are scoped to backend changes:
+- `pre-commit` runs `pnpm lint-staged` when staged files include `backend/` (currently configured to run `biome check --write` on staged `backend/**/*.{ts,js,json}` files only).
+- `pre-push` runs `pnpm --dir backend test` when pushed commits include `backend/`.
+
 ## Coding Style & Naming Conventions
 This codebase uses TypeScript with ESLint 9 and Prettier 3. Prettier enforces `singleQuote: true` and trailing commas. Follow the existing 2-space NestJS/TypeScript style and keep imports explicit. Use `PascalCase` for classes, DTOs, and modules, `camelCase` for functions and variables, and kebab-free filenames that match Nest defaults such as `auth.service.ts` and `create-user.dto.ts`.
 
