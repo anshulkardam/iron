@@ -8,7 +8,8 @@ import { Logger } from '@nestjs/common';
 import helmet from '@fastify/helmet';
 import fastifyCsrf from '@fastify/csrf-protection';
 import compression from '@fastify/compress';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import fastifySwagger from '@fastify/swagger';
+import fastifySwaggerUi from '@fastify/swagger-ui';
 import { env } from './env';
 
 async function bootstrap() {
@@ -31,16 +32,28 @@ async function bootstrap() {
 
   app.setGlobalPrefix('api/v1');
 
-  const config = new DocumentBuilder()
-    .setTitle('API Documentation')
-    .setDescription('API documentation for the backend')
-    .setVersion('1.0')
-    .addBearerAuth()
-    .build();
+  await app.register(fastifySwagger, {
+    openapi: {
+      info: {
+        title: 'API Documentation',
+        description: 'API documentation for the backend',
+        version: '1.0.0',
+      },
+      components: {
+        securitySchemes: {
+          bearerAuth: {
+            type: 'http',
+            scheme: 'bearer',
+            bearerFormat: 'JWT',
+          },
+        },
+      },
+    },
+  });
 
-  const openApiDoc = SwaggerModule.createDocument(app, config);
-
-  SwaggerModule.setup('docs', app, openApiDoc);
+  await app.register(fastifySwaggerUi, {
+    routePrefix: '/docs',
+  });
 
   await app.listen(PORT ?? 8080);
   logger.log(`Application is running on: ${await app.getUrl()}/api/v1`);
