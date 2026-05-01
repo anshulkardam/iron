@@ -1,0 +1,16 @@
+**/node_modules
+**/dist
+**/build
+**/.next
+**/.expo
+**/.turbo
+**/coverage
+.git
+.github
+.husky
+.vscode
+.idea
+**/*.log
+**/.env
+**/.env.local
+**/.DS_Store

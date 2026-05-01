@@ -1,15 +1,15 @@
+import compression from '@fastify/compress';
+import fastifyCsrf from '@fastify/csrf-protection';
+import helmet from '@fastify/helmet';
+import fastifySwagger from '@fastify/swagger';
+import fastifySwaggerUi from '@fastify/swagger-ui';
+import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import {
   FastifyAdapter,
-  NestFastifyApplication,
+  type NestFastifyApplication,
 } from '@nestjs/platform-fastify';
 import { AppModule } from './app.module';
-import { Logger } from '@nestjs/common';
-import helmet from '@fastify/helmet';
-import fastifyCsrf from '@fastify/csrf-protection';
-import compression from '@fastify/compress';
-import fastifySwagger from '@fastify/swagger';
-import fastifySwaggerUi from '@fastify/swagger-ui';
 import { env } from './env';
 
 async function bootstrap() {

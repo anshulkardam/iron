@@ -1,12 +1,22 @@
 {
   "name": "code-iron",
   "private": true,
+  "packageManager": "pnpm@10.33.0",
   "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "format": "biome format --write .",
+    "check": "biome check --write .",
+    "test": "turbo run test",
+    "typecheck": "turbo run typecheck",
     "prepare": "pnpm exec husky",
     "lint-staged": "pnpm exec lint-staged"
   },
   "devDependencies": {
+    "@biomejs/biome": "^2.2.0",
     "husky": "^9.1.7",
-    "lint-staged": "^16.2.6"
+    "lint-staged": "^16.2.6",
+    "turbo": "^2.5.0"
   }
 }

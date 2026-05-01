@@ -1,0 +1,11 @@
+packages:
+  - backend
+  - app
+  - web
+  - packages/*
+
+nodeLinker: hoisted
+
+ignoredBuiltDependencies:
+  - sharp
+  - unrs-resolver
